@@ -15,6 +15,7 @@
 
 start(_StartType, _StartArgs) ->
     ok = marthad_paths:ensure_layout(),
+    ok = ensure_pg_scope(),
     ok = start_martha_store(),
     ok = start_cowboy(),
     logger:info("[hecate_marthad] Started, socket at ~s",
@@ -27,6 +28,12 @@ stop(_State) ->
     ok.
 
 %%% Internal
+
+ensure_pg_scope() ->
+    case pg:start_link(hecate_marthad) of
+        {ok, _Pid} -> ok;
+        {error, {already_started, _Pid}} -> ok
+    end.
 
 start_martha_store() ->
     DataDir = marthad_paths:reckon_path("martha"),

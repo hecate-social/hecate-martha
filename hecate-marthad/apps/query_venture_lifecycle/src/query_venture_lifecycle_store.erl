@@ -1,6 +1,6 @@
 %%% @doc SQLite store for query_venture_lifecycle read models.
 %%%
-%%% Tables: ventures, discovered_divisions, event_stickies,
+%%% Tables: ventures, discovered_divisions, event_stickies, event_stacks,
 %%%          event_clusters, fact_arrows, storm_sessions
 %%% @end
 -module(query_venture_lifecycle_store).
@@ -157,6 +157,17 @@ create_tables(Db) ->
             cluster_id TEXT,
             created_at INTEGER NOT NULL
         );",
+
+        "CREATE TABLE IF NOT EXISTS event_stacks (
+            stack_id TEXT PRIMARY KEY,
+            venture_id TEXT NOT NULL,
+            color TEXT NOT NULL,
+            sticky_ids TEXT DEFAULT '[]',
+            status TEXT DEFAULT 'active',
+            emerged_at INTEGER NOT NULL
+        );",
+        "CREATE INDEX IF NOT EXISTS idx_stacks_venture
+            ON event_stacks(venture_id);",
 
         "CREATE TABLE IF NOT EXISTS event_clusters (
             cluster_id TEXT PRIMARY KEY,

@@ -3,7 +3,6 @@
 %%% Supervises all emitters for venture lifecycle events:
 %%% - PG emitters: subscribe to evoq, broadcast to pg groups (internal)
 %%% - Mesh emitters: subscribe to evoq, publish to mesh (external)
-%%% - TUI emitters: subscribe to evoq, broadcast to TUI connections (local)
 %%% @end
 -module(guide_venture_lifecycle_sup).
 -behaviour(supervisor).
@@ -199,15 +198,6 @@ init([]) ->
           restart => permanent, type => worker},
         #{id => event_cluster_promoted_v1_to_mesh,
           start => {event_cluster_promoted_v1_to_mesh, start_link, []},
-          restart => permanent, type => worker},
-
-        %% ── TUI emitters (local, subscribe via evoq → broadcast to TUI) ────
-
-        #{id => venture_initiated_v1_to_tui,
-          start => {venture_initiated_v1_to_tui, start_link, []},
-          restart => permanent, type => worker},
-        #{id => discovery_started_v1_to_tui,
-          start => {discovery_started_v1_to_tui, start_link, []},
           restart => permanent, type => worker}
     ],
 

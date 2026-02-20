@@ -174,6 +174,14 @@ init([]) ->
             type => supervisor
         },
 
+        %% Projection: event_stack_emerged_v1 -> event_stacks table
+        #{
+            id => event_stack_emerged_v1_to_event_stacks_sup,
+            start => {event_stack_emerged_v1_to_event_stacks_sup, start_link, []},
+            restart => permanent,
+            type => supervisor
+        },
+
         %% Projection: event_cluster_emerged_v1 -> event_clusters table
         #{
             id => event_cluster_emerged_v1_to_event_clusters_sup,
