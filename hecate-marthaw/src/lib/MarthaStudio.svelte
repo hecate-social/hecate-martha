@@ -1,3 +1,5 @@
+<svelte:options customElement={{ tag: "martha-studio", shadow: "none" }} />
+
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import type { PluginApi, HealthData, Venture } from './types.js';

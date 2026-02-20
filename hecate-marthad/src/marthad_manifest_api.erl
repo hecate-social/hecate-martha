@@ -14,7 +14,8 @@ init(Req0, State) ->
                 <<"name">> => <<"martha">>,
                 <<"version">> => list_to_binary(Vsn),
                 <<"icon">> => <<16#1F9D9/utf8>>,
-                <<"description">> => <<"ALC/DevOps Agent">>
+                <<"description">> => <<"ALC/DevOps Agent">>,
+                <<"tag">> => <<"martha-studio">>
             }),
             Req1 = cowboy_req:reply(200, #{
                 <<"content-type">> => <<"application/json">>,

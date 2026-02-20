@@ -3,7 +3,12 @@ import { defineConfig } from 'vite';
 import path from 'path';
 
 export default defineConfig({
-	plugins: [svelte({ compilerOptions: { css: 'injected' } })],
+	plugins: [svelte({
+		compilerOptions: {
+			css: 'injected',
+			customElement: true
+		}
+	})],
 	resolve: {
 		alias: {
 			$lib: path.resolve(__dirname, 'src/lib')
@@ -16,10 +21,6 @@ export default defineConfig({
 			fileName: () => 'component.js'
 		},
 		outDir: 'dist',
-		emptyOutDir: true,
-		rollupOptions: {
-			// Svelte runtime is provided by hecate-web at runtime
-			external: ['svelte', 'svelte/internal', 'svelte/internal/client']
-		}
+		emptyOutDir: true
 	}
 });
