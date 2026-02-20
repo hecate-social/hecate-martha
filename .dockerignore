@@ -1,0 +1,11 @@
+.git
+.github
+*.md
+LICENSE
+scripts/
+
+# Build artifacts
+hecate-marthad/_build/
+hecate-marthaw/node_modules/
+hecate-marthaw/dist/
+hecate-marthaw/.svelte-kit/

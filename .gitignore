@@ -1,0 +1,17 @@
+# Erlang/rebar3
+_build/
+_checkouts/
+rebar.lock
+erl_crash.dump
+*.beam
+
+# Node/npm
+node_modules/
+dist/
+.svelte-kit/
+package-lock.json
+
+# OS
+.DS_Store
+*.swp
+*~

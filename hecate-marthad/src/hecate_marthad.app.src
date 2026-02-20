@@ -1,0 +1,28 @@
+{application, hecate_marthad, [
+    {description, "Hecate Martha - ALC/DevOps Agent Daemon"},
+    {vsn, "0.1.0"},
+    {registered, [hecate_marthad_sup]},
+    {mod, {hecate_marthad_app, []}},
+    {applications, [
+        kernel,
+        stdlib,
+        crypto,
+        ssl,
+        inets,
+        cowboy,
+        hackney,
+        reckon_db,
+        evoq,
+        reckon_evoq,
+        esqlite
+    ]},
+    {env, [
+        {data_dir, "~/.hecate/hecate-marthad"},
+        {api_socket_name, "api.sock"}
+    ]},
+    {modules, []},
+    {licenses, ["Apache-2.0"]},
+    {links, [
+        {"GitHub", "https://github.com/hecate-social/hecate-martha"}
+    ]}
+]}.
