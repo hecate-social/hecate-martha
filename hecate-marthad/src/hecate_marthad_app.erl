@@ -13,6 +13,9 @@
 
 -export([start/2, stop/1]).
 
+%% reckon_db is excluded from dialyzer PLT (no debug_info in hex dep beams).
+-dialyzer({nowarn_function, start_martha_store/0}).
+
 start(_StartType, _StartArgs) ->
     ok = marthad_paths:ensure_layout(),
     ok = ensure_pg_scope(),

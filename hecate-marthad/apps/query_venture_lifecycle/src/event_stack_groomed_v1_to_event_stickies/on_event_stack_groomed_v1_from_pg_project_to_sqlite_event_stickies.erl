@@ -20,11 +20,7 @@ init([]) ->
 
 handle_info({events, Events}, State) ->
     lists:foreach(fun(E) ->
-        case event_stack_groomed_v1_to_sqlite_event_stickies:project(marthad_projection_event:to_map(E)) of
-            ok -> ok;
-            {error, Reason} ->
-                logger:warning("[~s] projection failed: ~p", [?EVENT_TYPE, Reason])
-        end
+        ok = event_stack_groomed_v1_to_sqlite_event_stickies:project(marthad_projection_event:to_map(E))
     end, Events),
     {noreply, State};
 handle_info(_Info, State) -> {noreply, State}.

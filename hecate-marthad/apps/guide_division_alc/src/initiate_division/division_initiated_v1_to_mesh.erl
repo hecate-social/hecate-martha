@@ -27,9 +27,7 @@ handle_info({events, Events}, State) ->
     lists:foreach(fun(E) ->
         case marthad_mesh_proxy:publish(?TOPIC, E) of
             ok -> ok;
-            {error, not_connected} -> ok;
-            {error, Reason} ->
-                logger:warning("[~s] Mesh publish failed: ~p", [?MODULE, Reason])
+            {error, _} -> ok
         end
     end, Events),
     {noreply, State};

@@ -31,13 +31,4 @@ format_event(#evoq_event{event_type = Type, data = Data, version = Version, time
         data => Data,
         version => Version,
         timestamp => Ts
-    };
-format_event(Event) when is_map(Event) ->
-    #{
-        event_type => maps:get(<<"event_type">>, Event, maps:get(event_type, Event, unknown)),
-        data => Event,
-        version => maps:get(<<"version">>, Event, maps:get(version, Event, undefined)),
-        timestamp => maps:get(<<"timestamp">>, Event, maps:get(timestamp, Event, undefined))
-    };
-format_event(Event) ->
-    #{data => Event}.
+    }.
