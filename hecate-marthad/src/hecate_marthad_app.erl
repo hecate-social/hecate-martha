@@ -57,14 +57,13 @@ start_cowboy() ->
     SocketPath = marthad_paths:socket_path("api.sock"),
     cleanup_socket_file(SocketPath),
     StaticDir = static_dir(),
-    Dispatch = cowboy_router:compile([
-        {'_', [
-            {"/health", marthad_health_api, []},
-            {"/manifest", marthad_manifest_api, []},
-            {"/ui/[...]", cowboy_static, {dir, StaticDir, [{mimetypes, cow_mimetypes, all}]}},
-            {"/api/[...]", marthad_api_routes, []}
-        ]}
-    ]),
+    CoreRoutes = [
+        {"/health", marthad_health_api, []},
+        {"/manifest", marthad_manifest_api, []},
+        {"/ui/[...]", cowboy_static, {dir, StaticDir, [{mimetypes, cow_mimetypes, all}]}}
+    ],
+    ApiRoutes = marthad_api_routes:discover_routes(),
+    Dispatch = cowboy_router:compile([{'_', CoreRoutes ++ ApiRoutes}]),
     TransOpts = #{
         socket_opts => [{ifaddr, {local, SocketPath}}],
         num_acceptors => 5

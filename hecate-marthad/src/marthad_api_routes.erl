@@ -10,7 +10,7 @@
 -module(marthad_api_routes).
 
 -export([init/2]).
--export([compile/0]).
+-export([compile/0, discover_routes/0]).
 
 %% Martha OTP apps that may contain API handlers.
 -define(MARTHA_APPS, [
