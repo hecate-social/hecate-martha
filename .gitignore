@@ -9,7 +9,6 @@ erl_crash.dump
 node_modules/
 dist/
 .svelte-kit/
-package-lock.json
 
 # OS
 .DS_Store
