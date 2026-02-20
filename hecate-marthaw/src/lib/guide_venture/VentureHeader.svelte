@@ -73,6 +73,18 @@
 
 <div class="border-b border-surface-600 bg-surface-800/50 px-4 py-3 shrink-0">
 	<div class="flex items-center gap-3">
+		<!-- Back to browser -->
+		<button
+			onclick={() => clearActiveVenture()}
+			class="flex items-center gap-1 text-xs text-surface-400 hover:text-hecate-300
+				transition-colors shrink-0 -ml-1 px-1.5 py-1 rounded hover:bg-surface-700"
+		>
+			<span class="text-sm">{'\u{2190}'}</span>
+			<span>Ventures</span>
+		</button>
+
+		<span class="text-surface-600 text-xs">|</span>
+
 		<!-- Venture name + switcher -->
 		<div class="relative flex items-center gap-2">
 			<span class="text-hecate-400 text-lg">{'\u{25C6}'}</span>

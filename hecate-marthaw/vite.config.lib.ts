@@ -1,8 +1,14 @@
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { defineConfig } from 'vite';
+import path from 'path';
 
 export default defineConfig({
 	plugins: [svelte({ compilerOptions: { css: 'injected' } })],
+	resolve: {
+		alias: {
+			$lib: path.resolve(__dirname, 'src/lib')
+		}
+	},
 	build: {
 		lib: {
 			entry: 'src/lib/MarthaStudio.svelte',
