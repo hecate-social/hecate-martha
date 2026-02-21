@@ -5,6 +5,8 @@
 	import type { PluginApi, HealthData, Venture } from './types.js';
 	import { VL_ARCHIVED, VL_DISCOVERING, VL_DISCOVERY_PAUSED, hasFlag } from './types.js';
 	import { setApi } from './shared/api.js';
+	import { fetchModels } from './shared/context.js';
+	import { availableModels } from './shared/aiStore.js';
 
 	// --- Vertical slice stores ---
 	import {
@@ -21,7 +23,7 @@
 		initiateVenture
 	} from './guide_venture/guide_venture.js';
 	import { selectedPhase } from './shared/phaseStore.js';
-	import { showAIAssist, openAIAssist } from './shared/aiStore.js';
+	import { showAIAssist, openAIAssist, aiModel, setAIModelOverride } from './shared/aiStore.js';
 	import {
 		showEventStream,
 		bigPicturePhase
@@ -40,6 +42,7 @@
 	import PhaseProgress from './shared/PhaseProgress.svelte';
 	import EventStreamViewer from './shared/EventStreamViewer.svelte';
 	import AIAssistPanel from './shared/AIAssistPanel.svelte';
+	import ModelSelector from './shared/ModelSelector.svelte';
 
 	// --- Plugin infrastructure (preserved) ---
 	let { api }: { api: PluginApi } = $props();
@@ -120,12 +123,15 @@
 		}
 	}
 
-	onMount(() => {
+	onMount(async () => {
 		setApi(api);
 		fetchHealth();
 		pollTimer = setInterval(fetchHealth, 5000);
 		fetchActiveVenture();
 		fetchVentures();
+		// Load LLM models from hecate-daemon
+		const models = await fetchModels();
+		availableModels.set(models);
 	});
 
 	onDestroy(() => {
@@ -179,6 +185,12 @@
 								: connectionStatus}
 						</span>
 					</div>
+
+					<!-- Model selector -->
+					<ModelSelector
+						currentModel={$aiModel}
+						onSelect={(name) => setAIModelOverride(name)}
+					/>
 
 					<div class="flex-1"></div>
 

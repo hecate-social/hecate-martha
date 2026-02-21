@@ -72,11 +72,11 @@ export async function fetchDivisions(ventureId: string): Promise<void> {
 	}
 }
 
-export async function initiateVenture(name: string, vision: string): Promise<boolean> {
+export async function initiateVenture(name: string, brief: string): Promise<boolean> {
 	try {
 		isLoading.set(true);
 		const api = getApi();
-		await api.post('/api/ventures', { name, vision });
+		await api.post('/api/ventures/initiate', { name, brief, initiated_by: 'hecate-web' });
 		await fetchVentures();
 		await fetchActiveVenture();
 		return true;
