@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: hecate-social/hecate-marthad
+  IMAGE_NAME: hecate-social/hecate-app-marthad
 
 jobs:
   build-and-push:
